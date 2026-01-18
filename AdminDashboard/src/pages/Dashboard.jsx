@@ -18,7 +18,7 @@ const Dashboard = () => {
     useEffect(() => {
         const fetchStats = async () => {
             try {
-                const { data } = await axios.get('http://localhost:5000/api/posts/admin/stats', {
+                const { data } = await axios.get('https://blogs-backend-bde8.onrender.com/api/posts/admin/stats', {
                     headers: { Authorization: `Bearer ${user.token}` }
                 });
                 setStats(data);

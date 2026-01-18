@@ -16,7 +16,7 @@ const PostList = () => {
 
     const fetchPosts = async () => {
         try {
-            const { data } = await axios.get('http://localhost:5000/api/posts');
+            const { data } = await axios.get('https://blogs-backend-bde8.onrender.com/api/posts');
             setPosts(data.posts);
             setLoading(false);
         } catch (err) {
@@ -28,7 +28,7 @@ const PostList = () => {
     const deleteHandler = async (id) => {
         if (window.confirm('Are you sure you want to delete this post?')) {
             try {
-                await axios.delete(`http://localhost:5000/api/posts/${id}`, {
+                await axios.delete(`https://blogs-backend-bde8.onrender.com/api/posts/${id}`, {
                     headers: { Authorization: `Bearer ${user.token}` }
                 });
                 fetchPosts();

@@ -15,7 +15,7 @@ const CommentList = () => {
 
     const fetchComments = async () => {
         try {
-            const { data } = await axios.get('http://localhost:5000/api/comments/admin/my-comments', {
+            const { data } = await axios.get('https://blogs-backend-bde8.onrender.com/api/comments/admin/my-comments', {
                 headers: { Authorization: `Bearer ${user.token}` }
             });
             setComments(data);
@@ -28,7 +28,7 @@ const CommentList = () => {
 
     const approveHandler = async (id) => {
         try {
-            await axios.put(`http://localhost:5000/api/comments/${id}/approve`, {}, {
+            await axios.put(`https://blogs-backend-bde8.onrender.com/api/comments/${id}/approve`, {}, {
                 headers: { Authorization: `Bearer ${user.token}` }
             });
             fetchComments();
@@ -40,7 +40,7 @@ const CommentList = () => {
     const deleteHandler = async (id) => {
         if (window.confirm('Delete this comment?')) {
             try {
-                await axios.delete(`http://localhost:5000/api/comments/${id}`, {
+                await axios.delete(`https://blogs-backend-bde8.onrender.com/api/comments/${id}`, {
                     headers: { Authorization: `Bearer ${user.token}` }
                 });
                 fetchComments();

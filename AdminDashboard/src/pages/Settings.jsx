@@ -23,7 +23,7 @@ const Settings = () => {
 
     const fetchSettings = async () => {
         try {
-            const { data } = await axios.get('http://localhost:5000/api/settings');
+            const { data } = await axios.get('https://blogs-backend-bde8.onrender.com/api/settings');
             setSiteName(data.siteName);
             setSiteTitle(data.siteTitle);
             setLogo(data.logo);
@@ -42,7 +42,7 @@ const Settings = () => {
         e.preventDefault();
         setSaving(true);
         try {
-            await axios.put('http://localhost:5000/api/settings', {
+            await axios.put('https://blogs-backend-bde8.onrender.com/api/settings', {
                 siteName,
                 siteTitle,
                 logo,

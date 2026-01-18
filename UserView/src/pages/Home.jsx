@@ -15,7 +15,7 @@ const Home = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const postsRes = await axios.get('http://localhost:5000/api/posts');
+                const postsRes = await axios.get('https://blogs-backend-bde8.onrender.com/api/posts');
                 // Handle both { posts: [...] } and [...] response structures
                 const postsData = postsRes.data.posts || postsRes.data;
                 setPosts(Array.isArray(postsData) ? postsData : []);

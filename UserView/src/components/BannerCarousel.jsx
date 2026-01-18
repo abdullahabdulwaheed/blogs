@@ -36,7 +36,7 @@ const BannerCarousel = () => {
     useEffect(() => {
         const fetchBanners = async () => {
             try {
-                const { data } = await axios.get('http://localhost:5000/api/banners');
+                const { data } = await axios.get('https://blogs-backend-bde8.onrender.com/api/banners');
                 if (data && data.length > 0) {
                     setBanners(data);
                 } else {

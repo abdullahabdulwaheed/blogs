@@ -27,7 +27,7 @@ const UserEdit = () => {
             setLoading(true);
             const fetchUser = async () => {
                 try {
-                    const { data } = await axios.get(`http://localhost:5000/api/users/${id}`, {
+                    const { data } = await axios.get(`https://blogs-backend-bde8.onrender.com/api/users/${id}`, {
                         headers: { Authorization: `Bearer ${currentUser.token}` }
                     });
 
@@ -50,7 +50,7 @@ const UserEdit = () => {
         e.preventDefault();
         try {
             if (id) { // Update existing user
-                await axios.put(`http://localhost:5000/api/users/${id}`, {
+                await axios.put(`https://blogs-backend-bde8.onrender.com/api/users/${id}`, {
                     name,
                     email,
                     isAdmin,
@@ -59,7 +59,7 @@ const UserEdit = () => {
                     headers: { Authorization: `Bearer ${currentUser.token}` }
                 });
             } else { // Create new user
-                await axios.post(`http://localhost:5000/api/users/create`, {
+                await axios.post(`https://blogs-backend-bde8.onrender.com/api/users/create`, {
                     name,
                     email,
                     password,

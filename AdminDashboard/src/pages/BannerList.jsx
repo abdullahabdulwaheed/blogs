@@ -21,7 +21,7 @@ const BannerList = () => {
 
     const fetchBanners = async () => {
         try {
-            const { data } = await axios.get('http://localhost:5000/api/banners/admin', {
+            const { data } = await axios.get('https://blogs-backend-bde8.onrender.com/api/banners/admin', {
                 headers: { Authorization: `Bearer ${user.token}` }
             });
             setBanners(data);
@@ -35,7 +35,7 @@ const BannerList = () => {
     const submitHandler = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:5000/api/banners', {
+            await axios.post('https://blogs-backend-bde8.onrender.com/api/banners', {
                 title, subtitle, desc, image
             }, {
                 headers: { Authorization: `Bearer ${user.token}` }
@@ -51,7 +51,7 @@ const BannerList = () => {
     const deleteHandler = async (id) => {
         if (window.confirm('Delete banner?')) {
             try {
-                await axios.delete(`http://localhost:5000/api/banners/${id}`, {
+                await axios.delete(`https://blogs-backend-bde8.onrender.com/api/banners/${id}`, {
                     headers: { Authorization: `Bearer ${user.token}` }
                 });
                 fetchBanners();
@@ -63,7 +63,7 @@ const BannerList = () => {
 
     const toggleStatusHandler = async (banner) => {
         try {
-            await axios.put(`http://localhost:5000/api/banners/${banner._id}`, {
+            await axios.put(`https://blogs-backend-bde8.onrender.com/api/banners/${banner._id}`, {
                 isActive: !banner.isActive
             }, {
                 headers: { Authorization: `Bearer ${user.token}` }

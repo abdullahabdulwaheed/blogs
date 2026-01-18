@@ -13,7 +13,7 @@ const Categories = () => {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const { data } = await axios.get('http://localhost:5000/api/categories');
+                const { data } = await axios.get('https://blogs-backend-bde8.onrender.com/api/categories');
                 setCategories(data);
                 setLoading(false);
             } catch (err) {

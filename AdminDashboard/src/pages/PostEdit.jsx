@@ -24,14 +24,14 @@ const PostEdit = () => {
 
     useEffect(() => {
         const fetchCategories = async () => {
-            const { data } = await axios.get('http://localhost:5000/api/categories');
+            const { data } = await axios.get('https://blogs-backend-bde8.onrender.com/api/categories');
             setCategories(data);
         };
         fetchCategories();
 
         if (isEdit) {
             const fetchPost = async () => {
-                const { data } = await axios.get(`http://localhost:5000/api/posts`);
+                const { data } = await axios.get(`https://blogs-backend-bde8.onrender.com/api/posts`);
                 const post = data.posts.find(p => p._id === id);
                 if (post) {
                     setTitle(post.title);
@@ -53,7 +53,7 @@ const PostEdit = () => {
         formData.append('image', file);
         setUploading(true);
         try {
-            const { data } = await axios.post('http://localhost:5000/api/upload', formData, {
+            const { data } = await axios.post('https://blogs-backend-bde8.onrender.com/api/upload', formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
             setFeaturedImage(data);
@@ -78,11 +78,11 @@ const PostEdit = () => {
 
         try {
             if (isEdit) {
-                await axios.put(`http://localhost:5000/api/posts/${id}`, postData, {
+                await axios.put(`https://blogs-backend-bde8.onrender.com/api/posts/${id}`, postData, {
                     headers: { Authorization: `Bearer ${user.token}` }
                 });
             } else {
-                await axios.post('http://localhost:5000/api/posts', postData, {
+                await axios.post('https://blogs-backend-bde8.onrender.com/api/posts', postData, {
                     headers: { Authorization: `Bearer ${user.token}` }
                 });
             }

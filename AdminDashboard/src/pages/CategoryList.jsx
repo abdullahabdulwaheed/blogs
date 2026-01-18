@@ -21,7 +21,7 @@ const CategoryList = () => {
 
     const fetchCategories = async () => {
         try {
-            const { data } = await axios.get('http://localhost:5000/api/categories');
+            const { data } = await axios.get('https://blogs-backend-bde8.onrender.com/api/categories');
             setCategories(data);
             setLoading(false);
         } catch (err) {
@@ -41,12 +41,12 @@ const CategoryList = () => {
 
         try {
             if (editId) {
-                await axios.put(`http://localhost:5000/api/categories/${editId}`,
+                await axios.put(`https://blogs-backend-bde8.onrender.com/api/categories/${editId}`,
                     { name: trimmedName, slug, description },
                     { headers: { Authorization: `Bearer ${user.token}` } }
                 );
             } else {
-                await axios.post('http://localhost:5000/api/categories',
+                await axios.post('https://blogs-backend-bde8.onrender.com/api/categories',
                     { name: trimmedName, slug, description },
                     { headers: { Authorization: `Bearer ${user.token}` } }
                 );
@@ -61,7 +61,7 @@ const CategoryList = () => {
     const deleteHandler = async (id) => {
         if (window.confirm('Delete category?')) {
             try {
-                await axios.delete(`http://localhost:5000/api/categories/${id}`, {
+                await axios.delete(`https://blogs-backend-bde8.onrender.com/api/categories/${id}`, {
                     headers: { Authorization: `Bearer ${user.token}` }
                 });
                 fetchCategories();

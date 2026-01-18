@@ -15,7 +15,7 @@ const PostDetails = () => {
     useEffect(() => {
         const fetchPost = async () => {
             try {
-                const { data } = await axios.get(`http://localhost:5000/api/posts/slug/${slug}`);
+                const { data } = await axios.get(`https://blogs-backend-bde8.onrender.com/api/posts/slug/${slug}`);
                 setPost(data);
                 setLoading(false);
             } catch (err) {
