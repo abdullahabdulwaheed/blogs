@@ -1,16 +1,29 @@
-# React + Vite
+# MKR-BLOGS | Reader Interface
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The premium reader-facing frontend for the MKR-BLOGS platform, featuring a high-end digital magazine aesthetic.
 
-Currently, two official plugins are available:
+## 🔗 Live Frontend URL
+[https://blogs-frontend-yja0.onrender.com/](https://blogs-frontend-yja0.onrender.com/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📖 Features
+- **Editorial Archive**: Clean, grid-based layout for exploring articles.
+- **Dynamic Banners**: Interactive hero section for featured content.
+- **Reading Mode**: Progress bars and table of contents for deep reading.
+- **Category Filtering**: Easy navigation through different topics.
+- **User Engagement**: Commenting system and post ratings.
+- **SEO Ready**: Optimized with React Helmet for all pages.
 
-## React Compiler
+## 🎨 Aesthetic
+- **Design System**: Forest Theme (Charcoal, Ivory, and Emerald Green).
+- **Typography**: Typography-first approach for superior readability.
+- **Responsiveness**: Fully optimized for mobile, tablet, and desktop.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Stack
+- React + Vite
+- Framer Motion
+- Lucide Icons
+- Bootstrap
+- React Helmet (SEO)
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+Connects to: [https://blogs-backend-bde8.onrender.com/](https://blogs-backend-bde8.onrender.com/)

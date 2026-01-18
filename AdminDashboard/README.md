@@ -1,16 +1,27 @@
-# React + Vite
+# MKR-BLOGS | Admin Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Comprehensive management interface for the MKR-BLOGS platform.
 
-Currently, two official plugins are available:
+## 🔗 Live Admin URL
+[https://blogs-admin.onrender.com/](https://blogs-admin.onrender.com/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Key Features
+- **Real-time Analytics**: Monitor views, posts, and user engagement.
+- **Content Management**: Full CRUD operations for Posts, Categories, and Banners.
+- **User Management**: Role-based access control for admins and bloggers.
+- **System Settings**: Manage site metadata, social links, and footer content.
+- **Micro-Animations**: Smooth transitions and interactive UI elements.
 
-## React Compiler
+## 🔐 Login Credentials
+- **Super Admin Email**: `abdullah35@gmail.com`
+- **Password**: `Abdullah35`
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Stack
+- React + Vite
+- Bootstrap (Styling)
+- Lucide Icons
+- Framer Motion (Animations)
+- Axios (API Communication)
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+Connects to: [https://blogs-backend-bde8.onrender.com/](https://blogs-backend-bde8.onrender.com/)
