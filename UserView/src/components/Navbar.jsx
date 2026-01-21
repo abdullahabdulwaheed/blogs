@@ -9,7 +9,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 const NewsLogo = ({ size = 40 }) => (
     <svg width={size} height={size} viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect x="2" y="2" width="36" height="36" rx="2" fill="currentColor" />
-        <rect x="5" y="5" width="30" height="30" rx="1" fill="#FFFFFF" />
+        <rect x="5" y="5" width="30" height="30" rx="1" fill="var(--logo-inner-fill, #FFFFFF)" />
         <rect x="8" y="8" width="10" height="10" fill="currentColor" opacity="0.8" />
         <rect x="20" y="8" width="12" height="2" rx="0.5" fill="currentColor" />
         <rect x="20" y="12" width="12" height="2" rx="0.5" fill="currentColor" />
@@ -81,15 +81,15 @@ const Navbar = () => {
                     <Link to="/" className="nav-link text-ink px-2">Home</Link>
                     <Link to="/categories" className="nav-link text-ink px-2">Sections</Link>
                     <div className="d-flex align-items-center gap-3 ms-3 border-start ps-4 border-secondary">
-                        <button onClick={toggleTheme} className="btn-icon text-ink" title={isDarkMode ? 'Light Mode' : 'Dark Mode'}>
+                        <button onClick={toggleTheme} className="btn-icon" title={isDarkMode ? 'Light Mode' : 'Dark Mode'}>
                             {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
                         </button>
                         {user ? (
                             <>
-                                <Link to="/profile" className="btn-icon text-ink" title="Profile">
+                                <Link to="/profile" className="btn-icon" title="Profile">
                                     <User size={20} />
                                 </Link>
-                                <button onClick={logout} className="btn-icon text-ink" title="Sign Out">
+                                <button onClick={logout} className="btn-icon" title="Sign Out">
                                     <LogOut size={20} />
                                 </button>
                             </>
