@@ -7,22 +7,38 @@ import { motion } from 'framer-motion';
 import { Folder } from 'lucide-react';
 
 const Categories = () => {
-    const [categories, setCategories] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [categories, setCategories] = useState(() => {
+        const saved = localStorage.getItem('cached_categories');
+        return saved ? JSON.parse(saved) : [];
+    });
+    const [loading, setLoading] = useState(categories.length === 0);
 
     useEffect(() => {
         const fetchCategories = async () => {
             try {
                 const { data } = await axios.get('https://blogs-backend-bde8.onrender.com/api/categories');
                 setCategories(data);
+                localStorage.setItem('cached_categories', JSON.stringify(data));
                 setLoading(false);
             } catch (err) {
                 console.error(err);
-                setLoading(false);
+                if (categories.length === 0) setLoading(false);
             }
         };
         fetchCategories();
     }, []);
+
+    const CategorySkeleton = () => (
+        <div className="vintage-box p-4 h-100 skeleton-box">
+            <div className="d-flex align-items-center gap-3 mb-3">
+                <div className="skeleton rounded-circle" style={{ width: 24, height: 24 }}></div>
+                <div className="skeleton skeleton-text w-50 mb-0"></div>
+            </div>
+            <div className="skeleton skeleton-text mb-2"></div>
+            <div className="skeleton skeleton-text w-75 mb-4"></div>
+            <div className="skeleton skeleton-text w-25"></div>
+        </div>
+    );
 
     return (
         <Layout>
@@ -35,18 +51,20 @@ const Categories = () => {
                     <p className="small opacity-75 mb-0">Select a secure channel to view archives.</p>
                 </div>
 
-                {loading ? (
-                    <div className="text-center">
-                        <div className="spinner-border text-danger" role="status"></div>
-                    </div>
-                ) : (
-                    <div className="row g-4">
-                        {categories.map((cat, idx) => (
+                <div className="row g-4">
+                    {loading ? (
+                        [1, 2, 3].map(i => (
+                            <div key={i} className="col-md-6 col-lg-4">
+                                <CategorySkeleton />
+                            </div>
+                        ))
+                    ) : (
+                        categories.map((cat, idx) => (
                             <div key={cat._id} className="col-md-6 col-lg-4">
                                 <motion.div
                                     initial={{ opacity: 0, scale: 0.9 }}
                                     animate={{ opacity: 1, scale: 1 }}
-                                    transition={{ delay: idx * 0.1 }}
+                                    transition={{ delay: idx * 0.05 }}
                                     className="vintage-box p-4 h-100 hover-border-danger transition-all cursor-pointer"
                                     style={{ backgroundColor: 'var(--card-bg)' }}
                                 >
@@ -58,14 +76,14 @@ const Categories = () => {
                                     <Link to={`/category/${cat.slug}`} className="btn-st py-1 px-3 d-inline-block" style={{ fontSize: '0.7rem' }}>ACCESS FILES</Link>
                                 </motion.div>
                             </div>
-                        ))}
-                        {categories.length === 0 && (
-                            <div className="col-12 text-center text-muted">
-                                <p>No sectors available yet.</p>
-                            </div>
-                        )}
-                    </div>
-                )}
+                        ))
+                    )}
+                    {!loading && categories.length === 0 && (
+                        <div className="col-12 text-center text-muted">
+                            <p>No sectors available yet.</p>
+                        </div>
+                    )}
+                </div>
             </div>
         </Layout>
     );

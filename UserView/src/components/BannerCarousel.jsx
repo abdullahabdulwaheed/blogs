@@ -29,9 +29,12 @@ const banners = [
 ];
 
 const BannerCarousel = () => {
-    const [banners, setBanners] = useState([]);
+    const [banners, setBanners] = useState(() => {
+        const saved = localStorage.getItem('cached_banners');
+        return saved ? JSON.parse(saved) : [];
+    });
     const [curr, setCurr] = useState(0);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(banners.length === 0);
 
     useEffect(() => {
         const fetchBanners = async () => {
@@ -39,8 +42,23 @@ const BannerCarousel = () => {
                 const { data } = await axios.get('https://blogs-backend-bde8.onrender.com/api/banners');
                 if (data && data.length > 0) {
                     setBanners(data);
+                    localStorage.setItem('cached_banners', JSON.stringify(data));
                 } else {
-                    // Fallback if no banners from API
+                    const fallback = [
+                        {
+                            id: 1,
+                            title: "Welcome to The Daily Post",
+                            subtitle: "EDITORIAL",
+                            desc: "Your trusted source for the latest news and technology insights.",
+                            image: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=2070&auto=format&fit=crop"
+                        }
+                    ];
+                    setBanners(fallback);
+                }
+                setLoading(false);
+            } catch (err) {
+                console.error("Failed to fetch banners", err);
+                if (banners.length === 0) {
                     setBanners([
                         {
                             id: 1,
@@ -51,18 +69,6 @@ const BannerCarousel = () => {
                         }
                     ]);
                 }
-                setLoading(false);
-            } catch (err) {
-                console.error("Failed to fetch banners", err);
-                setBanners([
-                    {
-                        id: 1,
-                        title: "Welcome to The Daily Post",
-                        subtitle: "EDITORIAL",
-                        desc: "Your trusted source for the latest news and technology insights.",
-                        image: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=2070&auto=format&fit=crop"
-                    }
-                ]);
                 setLoading(false);
             }
         };
@@ -77,7 +83,18 @@ const BannerCarousel = () => {
         return () => clearInterval(timer);
     }, [banners]);
 
-    if (loading) return null; // Or a skeleton
+    if (loading) return (
+        <div className="position-relative overflow-hidden skeleton" style={{ height: '65vh', minHeight: '500px' }}>
+            <div className="container h-100 d-flex align-items-center">
+                <div className="col-md-8 col-lg-6">
+                    <div className="skeleton-text skeleton w-25 mb-3"></div>
+                    <div className="skeleton-title skeleton mb-3"></div>
+                    <div className="skeleton-text skeleton mb-2"></div>
+                    <div className="skeleton-text skeleton w-75 mb-4"></div>
+                </div>
+            </div>
+        </div>
+    );
 
     return (
         <div className="position-relative overflow-hidden bg-dark" style={{ height: '65vh', minHeight: '500px' }}>

@@ -17,7 +17,7 @@ router.get('/', asyncHandler(async (req, res) => {
         res.json({
             siteName: 'The Daily Post',
             siteTitle: 'News & Editorial',
-            logo: '/logo.png',
+            logo: '/logo-news.svg',
             socials: { facebook: '', twitter: '', instagram: '', linkedin: '' }
         });
     }

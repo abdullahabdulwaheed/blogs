@@ -19,9 +19,10 @@ const PostCard = ({ post, index }) => {
                         alt={post.title}
                         className="w-100 object-fit-cover"
                         style={{ height: '240px' }}
+                        loading="lazy"
                     />
                     <div className="position-absolute bottom-0 start-0 bg-white text-dark px-2 py-1 small fw-bold text-uppercase border-top border-end border-dark" style={{ fontSize: '0.7rem' }}>
-                        {post.category.name}
+                        {post.category?.name || 'Uncategorized'}
                     </div>
                 </Link>
             </div>
@@ -29,7 +30,7 @@ const PostCard = ({ post, index }) => {
             <div className="d-flex align-items-center gap-3 small text-muted text-uppercase fw-bold mb-2">
                 <span>{new Date(post.createdAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
                 <span className="text-muted">•</span>
-                <span className="d-flex align-items-center gap-1"><Clock size={12} /> {post.readingTime} min read</span>
+                <span className="d-flex align-items-center gap-1"><Clock size={12} /> {post.readingTime || 5} min read</span>
             </div>
 
             <Link to={`/post/${post.slug}`} className="text-decoration-none text-body">

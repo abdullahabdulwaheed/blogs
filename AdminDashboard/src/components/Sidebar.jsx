@@ -14,6 +14,21 @@ import {
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
+const NewsLogo = ({ size = 32 }) => (
+    <svg width={size} height={size} viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="2" width="36" height="36" rx="2" fill="currentColor" />
+        <rect x="5" y="5" width="30" height="30" rx="1" fill="white" />
+        <rect x="8" y="8" width="10" height="10" fill="currentColor" opacity="0.8" />
+        <rect x="20" y="8" width="12" height="2" rx="0.5" fill="currentColor" />
+        <rect x="20" y="12" width="12" height="2" rx="0.5" fill="currentColor" />
+        <rect x="20" y="16" width="8" height="2" rx="0.5" fill="currentColor" />
+        <rect x="8" y="22" width="24" height="1.5" rx="0.5" fill="currentColor" opacity="0.6" />
+        <rect x="8" y="25" width="24" height="1.5" rx="0.5" fill="currentColor" opacity="0.6" />
+        <rect x="8" y="28" width="24" height="1.5" rx="0.5" fill="currentColor" opacity="0.6" />
+        <rect x="8" y="31" width="15" height="1.5" rx="0.5" fill="currentColor" opacity="0.6" />
+    </svg>
+);
+
 const Sidebar = ({ isOpen, setIsOpen }) => {
     const location = useLocation();
     const { user } = useAuth();
@@ -47,8 +62,8 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
                 {/* Logo Area */}
                 <div className="px-4 d-flex align-items-center border-bottom" style={{ height: '70px' }}>
                     <div className="d-flex align-items-center gap-2">
-                        <div className="bg-primary text-white p-1 rounded-2 d-flex align-items-center justify-content-center" style={{ width: '32px', height: '32px' }}>
-                            <span className="fw-bold fs-6">DP</span>
+                        <div className="text-primary">
+                            <NewsLogo size={32} />
                         </div>
                         <div>
                             <span className="fw-bold text-dark fs-5 tracking-tight d-block lh-1">Admin<span className="text-primary">Panel</span></span>

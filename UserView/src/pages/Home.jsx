@@ -9,38 +9,59 @@ import BannerCarousel from '../components/BannerCarousel';
 import FlashNews from '../components/FlashNews';
 
 const Home = () => {
-    const [posts, setPosts] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [settings, setSettings] = useState(() => {
+        const saved = localStorage.getItem('site_settings');
+        return saved ? JSON.parse(saved) : { siteName: 'MKR-BLOGS' };
+    });
+    const [posts, setPosts] = useState(() => {
+        // Load from cache initially
+        const saved = localStorage.getItem('cached_posts');
+        return saved ? JSON.parse(saved) : [];
+    });
+    const [loading, setLoading] = useState(posts.length === 0);
 
     useEffect(() => {
+        const fetchSettings = async () => {
+            try {
+                const { data } = await axios.get('https://blogs-backend-bde8.onrender.com/api/settings');
+                setSettings(data);
+                localStorage.setItem('site_settings', JSON.stringify(data));
+            } catch (err) {
+                console.error("Settings fetch failed", err);
+            }
+        };
+        fetchSettings();
+
         const fetchData = async () => {
             try {
                 const postsRes = await axios.get('https://blogs-backend-bde8.onrender.com/api/posts');
-                // Handle both { posts: [...] } and [...] response structures
                 const postsData = postsRes.data.posts || postsRes.data;
-                setPosts(Array.isArray(postsData) ? postsData : []);
+                const finalPosts = Array.isArray(postsData) ? postsData : [];
+                setPosts(finalPosts);
+                localStorage.setItem('cached_posts', JSON.stringify(finalPosts));
                 setLoading(false);
             } catch (err) {
                 console.error(err);
-                setLoading(false);
+                if (posts.length === 0) setLoading(false);
             }
         };
         fetchData();
     }, []);
 
-    if (loading) return (
-        <div className="min-vh-100 d-flex align-items-center justify-content-center bg-paper">
-            <div className="text-center">
-                <div className="spinner-border text-dark mb-3" role="status"></div>
-                <div className="text-uppercase small letter-spacing-2">Loading Content...</div>
-            </div>
+    const PostSkeleton = () => (
+        <div className="article-card h-100">
+            <div className="skeleton-img skeleton mb-3"></div>
+            <div className="skeleton-text skeleton w-25 mb-2"></div>
+            <div className="skeleton-title skeleton"></div>
+            <div className="skeleton-text skeleton"></div>
+            <div className="skeleton-text skeleton w-75"></div>
         </div>
     );
 
     return (
         <Layout>
             <Helmet>
-                <title>MKR-BLOGS | Editorial Archive</title>
+                <title>{settings.siteName} | Editorial Archive</title>
                 <meta name="description" content="A curated collection of digital stories." />
             </Helmet>
 
@@ -90,11 +111,19 @@ const Home = () => {
                     </div>
 
                     <div className="row g-4">
-                        {posts.map((post, index) => (
-                            <div key={post._id} className="col-12 col-md-6 col-lg-4">
-                                <PostCard post={post} index={index} />
-                            </div>
-                        ))}
+                        {loading ? (
+                            [1, 2, 3, 4, 5, 6].map(i => (
+                                <div key={i} className="col-12 col-md-6 col-lg-4">
+                                    <PostSkeleton />
+                                </div>
+                            ))
+                        ) : (
+                            posts.map((post, index) => (
+                                <div key={post._id} className="col-12 col-md-6 col-lg-4">
+                                    <PostCard post={post} index={index} />
+                                </div>
+                            ))
+                        )}
                     </div>
                 </div>
             </section>
